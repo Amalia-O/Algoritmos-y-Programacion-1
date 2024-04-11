@@ -50,7 +50,7 @@ int main()
 
 	// begin variables
 	
-	float x_moto = 4100;
+	float x_moto = 0;
 	float y_moto = 0;
 	size_t giro_moto = 0, paleta_moto = 0;
 	bool acelerar = false, frenar = false, izquierda = false, derecha = false, giro_izquierda = false, choque = false, primera_aceleracion = false;
@@ -373,8 +373,8 @@ int main()
 			size_t figura1_ancho = imagen_get_ancho(figura_escalada1);
 			size_t figura1_alto = imagen_get_alto(figura_escalada1);
 			
-			imagen_pegar_con_paleta(cuadro,figura_escalada1, ul+CENTRO_VERTICAL +u1_d - 2*figura1_ancho , VENTANA_ALTO -v1_d - figura1_alto,paleta_4[44]);
-			imagen_pegar_con_paleta(cuadro,figura_escalada1, ul-u1_d+figura1_ancho + CENTRO_VERTICAL, VENTANA_ALTO -v1_d - figura1_alto,paleta_4[44]);
+			imagen_pegar_con_paleta(cuadro,figura_escalada1,ul+ CENTRO_VERTICAL +u1_d - 2*figura1_ancho , alto_cuadro -v1_d - figura1_alto,paleta_4[44]);
+			imagen_pegar_con_paleta(cuadro,figura_escalada1, ul - u1_d+ figura1_ancho + CENTRO_VERTICAL , alto_cuadro -v1_d - figura1_alto,paleta_4[44]);
 			
 			
 			imagen_destruir(figura_escalada1);
@@ -386,8 +386,9 @@ int main()
 			size_t figura2_ancho = imagen_get_ancho(figura_escalada2);
 			size_t figura2_alto = imagen_get_alto(figura_escalada2);			
 			
-			imagen_pegar_con_paleta(cuadro,figura_escalada2, ul+CENTRO_VERTICAL+u1_d-2*figura1_ancho , VENTANA_ALTO-v1_d-figura1_alto-figura2_alto , paleta_4[45]);
-			imagen_pegar_con_paleta(cuadro,figura_escalada2, ul-u1_d+figura1_ancho + CENTRO_VERTICAL+figura1_ancho -figura2_ancho ,VENTANA_ALTO-v1_d-figura1_alto-figura2_alto, paleta_4[45]);
+			imagen_pegar_con_paleta(cuadro,figura_escalada2, ul+CENTRO_VERTICAL+u1_d-2*figura1_ancho , alto_cuadro-v1_d-figura1_alto-figura2_alto , paleta_4[45]);
+			if(figura2_ancho>30)
+				imagen_pegar_con_paleta(cuadro,figura_escalada2, ul-u1_d+(2*figura1_ancho) + alto_cuadro -figura2_ancho ,VENTANA_ALTO-v1_d-figura1_alto-figura2_alto, paleta_4[45]);
 			
 			imagen_destruir(figura_escalada2);
 			
@@ -395,7 +396,9 @@ int main()
 
 			imagen_t *figura_escalada3 = escalar_figura(vector_figuras[8], MAXIMO_X-x_moto, &u1_d, &v1_d);
 			
-			imagen_pegar_con_paleta(cuadro,figura_escalada3, ul + CENTRO_VERTICAL + u1_d ,VENTANA_ALTO-v1_d-figura1_alto-figura2_alto,paleta_4[47]);
+			figura3_ancho = imagen_get_ancho(figura_escalada3);
+			if( figura3_ancho >30)
+			imagen_pegar_con_paleta(cuadro,figura_escalada3, ul + CENTRO_VERTICAL + u1_d- (figura3_ancho/2) ,alto_cuadro-v1_d-figura1_alto-figura2_alto,paleta_4[47]);
 			
 			imagen_destruir(figura_escalada3);
 		}
@@ -436,8 +439,6 @@ int main()
 					imagen_destruir(figura_escalada);
 					}
 
-				// y_figura (int) + a (size_t) /2
-				// y_figura int + algo size_t ->size_t
 				int moto_derecha = (int) truncf((y_moto + get_ancho_moto(giro_moto, vector_moto)/2));
 				int moto_izquierda = (int)  truncf(y_moto - get_ancho_moto(giro_moto, vector_moto)/2);
 				
@@ -493,7 +494,7 @@ int main()
 		}
 		else if(x_moto > 4200){
 			tiempo_nivel = 0;
-			imagen_pegar_con_paleta(cuadro,vector_figuras[9], (CENTRO_VERTICAL-imagen_get_ancho(vector_figuras[9])),(alto_cuadro-imagen_get_alto(vector_figuras[9]))/2,paleta_4[28]);
+			imagen_pegar_con_paleta(cuadro,vector_figuras[9], 96,96,paleta_4[28]);
 			vf = 0;	
 			if (top_puntaje	< puntaje)	top_puntaje = puntaje;		
 		}
